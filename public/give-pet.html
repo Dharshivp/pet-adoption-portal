@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Give a Pet for Adoption - PetLoves</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.pexels.com/photos/1346086/pexels-photo-1346086.jpeg?auto=compress&cs=tinysrgb&w=600') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    nav {
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h1 {
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      margin: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2rem 1rem 0;
+      color: #ffffff;
+    }
+
+    .hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h3 {
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    .form-container {
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .pet-form {
+      background-color: #ffffffee;
+      padding: 2rem;
+      border-radius: 1rem;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .pet-form h3 {
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .pet-form input,
+    .pet-form select,
+    .pet-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .pet-form textarea {
+      resize: vertical;
+    }
+
+    .pet-form button {
+      background-color: #15723f;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .pet-form button:hover {
+      background-color: #e85c50;
+    }
+
+    footer {
+      text-align: center;
+      color: white;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+
+  <script>
+    function showThankYouMessage(event) {
+      alert("Thanks for your request. We will reach you to your doorstep soon.");
+    }
+  </script>
+</head>
+<body>
+  <div class="overlay">
+    <nav>
+      <h1>PawFinds</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="give-pet.html">Give Your Pet</a></li>
+        <li><a href="profile.html">Your Profile</a></li>
+        <li><a href="helper-dashboard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <h2>Give Your Pet a New Loving Home</h2>
+      <h3>Fill out the form below to list your pet for adoption</h3>
+    </section>
+
+    <section class="form-container">
+      <form class="pet-form" action="/submitPet" method="POST" onsubmit="showThankYouMessage()">
+        <h3>Your Details</h3>
+        <input type="text" name="ownerName" placeholder="Your Full Name" required />
+        <input type="tel" name="ownerPhone" placeholder="Phone Number" required />
+        <input type="email" name="ownerEmail" placeholder="Email Address" required />
+
+        <h3>Pet Details</h3>
+        <input type="text" name="petName" placeholder="Pet's Name" required />
+        <select name="petType" required>
+          <option value="">Select Pet Type</option>
+          <option value="Dog">Dog</option>
+          <option value="Cat">Cat</option>
+          <option value="Rabbit">Rabbit</option>
+          <option value="Parrot">Parrot</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="number" name="petAge" placeholder="Pet's Age (in years)" required />
+        <textarea name="petDescription" placeholder="Describe your pet's behavior, habits, health, etc." rows="4" required></textarea>
+        <textarea name="justification" placeholder="Why are you giving your pet for adoption?" rows="3" required></textarea>
+        <input type="text" name="petLocation" placeholder="Your City, State" required />
+        <input type="url" name="petImage" placeholder="Pet Image URL" />
+
+        <button type="submit">Submit Pet for Adoption</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 PetLoves. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

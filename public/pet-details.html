@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Details - PawFinds</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>PawFinds</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login/Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="petDetailContainer" class="pet-detail">
+    <!-- Pet detail content will load here -->
+  </main>
+
+  <footer>
+    <p>&copy; 2025 PawFinds. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+
+      if (id) {
+        fetch(`/api/pet/${id}`)
+          .then(res => res.json())
+          .then(pet => {
+            // Log the pet data to check if the 'age' field exists
+            console.log(pet);
+
+            // Fallback for missing data (e.g., if age is undefined)
+            const age = pet.age || 'Age not available';
+            
+            document.getElementById('petDetailContainer').innerHTML = `
+              <h2>${pet.name}</h2>
+              <img src="${pet.image}" alt="${pet.name}" style="max-width:300px">
+              <p><strong>Breed:</strong> ${pet.breed}</p>
+              <p><strong>Age:</strong> ${age}</p>
+              <p><strong>Description:</strong> ${pet.description}</p>
+              <a href="/adopt-form.html?petId=${pet._id}">
+                <button>Adopt Me</button>
+              </a>
+            `;
+          })
+          .catch(err => {
+            console.error("Error loading pet detail:", err);
+            document.getElementById('petDetailContainer').innerHTML = `<p>Error loading pet details.</p>`;
+          });
+      }
+    });
+  </script>
+</body>
+</html>

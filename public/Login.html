@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - PawFinds</title>
+</head>
+<body>
+  <h1>Login / Register</h1>
+  <form id="loginForm">
+    <label for="phoneNumber">Phone Number:</label><br />
+    <input type="tel" id="phoneNumber" name="phoneNumber" required /><br /><br />
+
+    <label for="name">Name (only if new user):</label><br />
+    <input type="text" id="name" name="name" /><br /><br />
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="message"></div>
+  <div id="profile"></div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const messageDiv = document.getElementById('message');
+    const profileDiv = document.getElementById('profile');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const phoneNumber = document.getElementById('phoneNumber').value.trim();
+      const name = document.getElementById('name').value.trim();
+
+      const payload = { phoneNumber };
+      if (name) payload.name = name;
+
+      try {
+        const res = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          messageDiv.textContent = data.error || 'Error occurred';
+          profileDiv.textContent = '';
+        } else {
+          messageDiv.textContent = data.message;
+          profileDiv.innerHTML = `
+            <h2>Welcome, ${data.user.name}</h2>
+            <p><strong>Phone:</strong> ${data.user.phoneNumber}</p>
+            <p><strong>Adopted Pets:</strong> ${
+              data.user.adoptedPets.length > 0
+                ? data.user.adoptedPets.join(', ')
+                : 'No pets adopted yet.'
+            }</p>
+          `;
+        }
+      } catch (error) {
+        messageDiv.textContent = 'Network error.';
+        profileDiv.textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>

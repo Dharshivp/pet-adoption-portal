@@ -1,0 +1,47 @@
+<!-- public/helper-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PawFinds - Helper Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background: url('https://t3.ftcdn.net/jpg/11/59/02/80/360_F_1159028092_oGVIIvuJSd4uW7AuvRxq1sX9A20JzxaM.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    .paw-animation {
+      position: fixed;
+      width: 50px;
+      height: 50px;
+      background: url('/images/paw.png') no-repeat center;
+      background-size: contain;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center">🐾 Become a Paw Hero</h1>
+    <form id="helper-form" enctype="multipart/form-data" method="POST" action="/dashboard/upload">
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" name="title" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Upload Your Pet Help Video</label>
+        <input type="file" name="video" class="form-control" accept="video/*" required>
+      </div>
+      <button class="btn btn-warning">Upload & Earn Points</button>
+    </form>
+  </div>
+
+  <img class="paw-animation" style="top: 20px; left: 20px;">
+  <img class="paw-animation" style="bottom: 20px; right: 20px;">
+</body>
+</html>

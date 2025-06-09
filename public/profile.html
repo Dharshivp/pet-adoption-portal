@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Profile - PawFinds</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <h1>PawFinds</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="profile.html">My Profile</a></li>
+      <li><a href="give-pet.html">Give your pet</a></li>
+       <li><a href="helper-dashboard.html">Dashboard</a></li>
+        
+    </ul>
+  </nav>
+
+  <h2>Welcome, <span id="username">User</span>!</h2>
+  <div id="profileContent"></div>
+
+  <script>
+    // Retrieve the user's name from localStorage
+    const username = localStorage.getItem('username');
+
+    // Display the username
+    document.getElementById('username').innerText = username;
+
+    // Optionally, fetch and display pet data
+    fetch(`/api/adoptedPets?username=${username}`)
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('profileContent');
+        if (!data.length) {
+          container.innerHTML = '<p>No pets adopted yet.</p>';
+          return;
+        }
+
+        data.forEach(pet => {
+          const div = document.createElement('div');
+          div.innerHTML = `
+            <h3>${pet.name}</h3>
+            <img src="${pet.image}" alt="${pet.name}" width="150">
+            <p><strong>Breed:</strong> ${pet.breed}</p>
+            <p><strong>Age:</strong> ${pet.age}</p>
+            <p><strong>Health Report:</strong></p>
+            <ul>
+              ${pet.healthReport.map(h => `<li>${h.date}: ${h.vaccine}</li>`).join('')}
+            </ul>
+            <form action="/api/uploadMemory" method="POST" enctype="multipart/form-data">
+              <input type="hidden" name="petId" value="${pet._id}">
+              <input type="file" name="memory" accept="image/*,video/*" required>
+              <button type="submit">Upload Memory</button>
+            </form>
+          `;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
+
+

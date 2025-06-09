@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All Pets - PawFinds</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>PawFinds</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="profile.html">Your Profile</a></li>
+      </ul>
+    </nav>
+    <h2>Available Pets</h2>
+  </header>
+
+  <main id="petsList" class="pet-container">
+    <!-- All pets will be displayed here -->
+  </main>
+
+  <footer>
+    <p>&copy; 2025 PawFinds. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/pets')
+        .then(res => res.json())
+        .then(pets => {
+          const container = document.getElementById("petsList");
+          if (pets.length === 0) {
+            container.innerHTML = `<p>No pets available at the moment.</p>`;
+            return;
+          }
+
+          container.innerHTML = pets.map(pet => `
+            <div class="pet-card">
+              <img src="${pet.image}" alt="${pet.name}">
+              <h3>${pet.name}</h3>
+              <p><strong>Breed:</strong> ${pet.breed}</p>
+              <p><strong>Age:</strong> ${pet.age}</p>
+              <p>${pet.description}</p>
+              <a href="adopt-form.html?petId=${pet._id}">
+                <button>Adopt Me</button>
+              </a>
+            </div>
+          `).join('');
+        })
+        .catch(err => {
+          console.error('Error fetching pets:', err);
+          document.getElementById("petsList").innerHTML = `<p>Error loading pets.</p>`;
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PawFinds🐶</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://js.stripe.com/v3/"></script
+</head>
+<body>
+  
+  <header>
+    <nav>
+      <h1> PawFinds
+</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        
+         <li><a href="profile.html">Your Profile</a></li>
+         <li><a href="give-pet.html">Give Your Pet</a></li> <!-- New link -->
+
+         <li><a href="helper-dashboard.html">Dashboard</a></li>
+        
+      </ul>
+    </nav>
+
+    <div class="hero">
+      <h2>“Find your furry best friend!”</h2>
+      <h3>“Adopt love, one paw at a time.”</h3>
+
+      <!-- Search Bar -->
+      <form id="searchForm">
+        <input type="text" id="searchInput" placeholder="Search pets by type, name or breed..." />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <main id="pet-results" class="pet-container">
+    <!-- Pet Cards Display Here -->
+  </main>
+
+  <footer>
+    <p>&copy; 2025 PawFinds. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('searchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const searchValue = document.getElementById('searchInput').value.trim();
+      if (searchValue) {
+        // Redirect to pets.html with query param
+        window.location.href = `/pets.html?breed=${encodeURIComponent(searchValue)}`;
+      }
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

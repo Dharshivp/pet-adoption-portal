@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to PawFinds</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Welcome to PawFinds!</h2>
+  <form id="userForm">
+    <label>Name:</label>
+    <input type="text" name="name" required><br>
+    <label>Phone:</label>
+    <input type="text" name="phone" required><br>
+    <button type="submit">Continue</button>
+  </form>
+
+  <script>
+    document.getElementById("userForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const user = {
+        name: formData.get("name"),
+        phone: formData.get("phone")
+      };
+
+      const res = await fetch("/api/users/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+      });
+
+      if (res.ok) {
+        localStorage.setItem("phone", user.phone);
+        window.location.href = "profile.html";
+      } else {
+        alert("Failed to save user");
+      }
+    });
+  </script>
+</body>
+</html>

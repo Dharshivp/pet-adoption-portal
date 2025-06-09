@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact PawFinds</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body style="background-image: url('https://pa1.aminoapps.com/6776/cc3abc283cac56f1f0fe0376f8c1530929dedb95_hq.gif');">
+  
+  <nav>
+    <h1>PawFinds</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="profile.html">Your Profile</a></li>
+      <li><a href="give-pet.html">Give Your Pet</a></li> 
+      <li><a href="helper-dashboard.html">Dashboard</a></li><!-- New link -->
+    </ul>
+  </nav>
+ <button onclick="new Audio('/sounds/pop.mp3').play()">WOOHH BOWWHH</button>
+  <section class="contact-section">
+    <h2>Get in Touch</h2>
+    <div class="contact-content">
+      
+      <!-- Contact Form -->
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="tel" name="phone" placeholder="Your Phone" />
+        <textarea name="message" rows="5" placeholder="How can we help you?" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+
+      <!-- Contact Info & Image -->
+      <div class="contact-info">
+        <p><strong>Address:</strong><br/>
+           123 Paw Street,<br/>
+           Chennai</p>
+        <p><strong>Phone:</strong><br/>
+           6381577933</p>
+        <p><strong>Email:</strong><br/>
+          dharshivpmca@gmail.com</p>
+          <p>Follow us on Instagram: <a href="https://www.instagram.com/dharshi.vp" target="_blank">dharshi.vp</a></p>
+<p>Follow us on Instagram: <a href="https://www.instagram.com/sri_ravi1090" target="_blank">sri_ravi1090</a></p>
+
+        <img src="images/cartoon-puppy4.png"
+             alt="Happy Puppy"
+             class="contact-puppy"/>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 PawFinds. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Basic form handler (no backend hooked up yet)
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thanks for reaching out! We will get back to you soon.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
